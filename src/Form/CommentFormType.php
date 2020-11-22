@@ -21,7 +21,7 @@ class CommentFormType extends AbstractType
             ->add('email', EmailType::class)
             //->add('createdAt')
             ->add('photo', FileType::class, ['required' => false, 'mapped' => false, 'constraints' => [new Image(['maxSize' => '1024k'])],])
-            //->add('conference')
+            ->add('conference')
             ->add('submit', SubmitType::class)
         ;
     }
