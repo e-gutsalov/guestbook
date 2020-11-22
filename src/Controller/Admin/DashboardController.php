@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Admin;
 use App\Entity\Comment;
 use App\Entity\Conference;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
@@ -20,6 +21,7 @@ class DashboardController extends AbstractDashboardController
     public function index(): Response
     {
         //return parent::index();
+
         // redirect to some CRUD controller
         $routeBuilder = $this->get(CrudUrlGenerator::class)->build();
 
@@ -39,16 +41,17 @@ class DashboardController extends AbstractDashboardController
     {
         return Dashboard::new()
             ->setTitle('Guestbook')
-            ->setFaviconPath('favicon.svg');
+            ->setFaviconPath('favicon.ico')
+            ->setTranslationDomain('admin');;
     }
 
     public function configureMenuItems(): iterable
     {
         //yield MenuItem::linktoDashboard('Dashboard', 'fa fa-home');
-        // yield MenuItem::linkToCrud('The Label', 'icon class', EntityClass::class);
+        //yield MenuItem::linkToCrud('The Label', 'icon class', EntityClass::class);
         return [
             //MenuItem::linkToDashboard('Dashboard', 'fa fa-home'),
-            MenuItem::linktoRoute('Home', 'fa fa-home', 'conference'),
+            MenuItem::linktoRoute('Home', 'fa fa-home', 'conferences'),
 
             MenuItem::section('Guestbook'),
             MenuItem::linkToCrud('Conference', 'fa fa-tags', Conference::class),
@@ -56,6 +59,9 @@ class DashboardController extends AbstractDashboardController
 
             MenuItem::section('Users'),
             //MenuItem::linkToCrud('Users', 'fa fa-user', User::class),
+            MenuItem::linkToCrud('Admin', 'fa fa-user', Admin::class),
+
+            //MenuItem::linkToLogout('Logout', 'fa fa-exit'),
         ];
     }
 }
