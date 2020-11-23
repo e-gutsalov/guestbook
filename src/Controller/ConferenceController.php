@@ -37,7 +37,7 @@ class ConferenceController extends AbstractController
     }
 
     /**
-     * @Route("/conference/{id}", name="conference")
+     * @Route("/conference/{slug}", name="conference")
      * @param Request $request
      * @param Conference $conference
      * @param CommentRepository $commentRepository
@@ -54,8 +54,8 @@ class ConferenceController extends AbstractController
             $this->entityManager->persist( $comment );
             $this->entityManager->flush();
 
-            //return $this->redirectToRoute( 'conference', [ 'slug' => $conference->getSlug() ] );
-            return $this->redirectToRoute( 'conference', [ 'id' => $conference->getId() ] );
+            return $this->redirectToRoute( 'conference', [ 'slug' => $conference->getSlug() ] );
+            //return $this->redirectToRoute( 'conference', [ 'id' => $conference->getId() ] );
         }
 
         $offset = max( 0, $request->query->getInt( 'offset', 0 ) );
